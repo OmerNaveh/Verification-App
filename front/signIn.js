@@ -14,7 +14,8 @@ signInBtn.onclick = async()=>{
     const response = await fetch(`${url}login`,{method:"POST",headers:{'Content-Type': 'application/json'} 
     ,body:JSON.stringify({userName,password})});
     const repObj = await response.json();
-    window.open(repObj.data);
+    const QRimg = document.createElement('img');
+    QRimg.src = repObj.data;
     const tokenInput = document.createElement('input');
     const tokeUserName = document.createElement('input');
     const tokenBtn = document.createElement('button');
@@ -32,5 +33,5 @@ signInBtn.onclick = async()=>{
             alert('invalid data')
         }
     }
-    tokenDiv.append(tokeUserName, tokenInput, tokenBtn);
+    tokenDiv.append(QRimg, tokeUserName, tokenInput, tokenBtn);
 }
