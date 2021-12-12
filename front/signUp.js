@@ -4,9 +4,7 @@ const url = 'http://localhost:3001/'
 const upUserName = document.getElementById('upUserName')
 const upPassword = document.getElementById('upPassword')
 const signUpBtn = document.getElementById('signUpBtn')
-const inUserName = document.getElementById('inUserName')
-const inPassword = document.getElementById('inPassword')
-const signInBtn = document.getElementById('signInBtn')
+
 
 
 signUpBtn.onclick = async()=>{
@@ -15,5 +13,12 @@ signUpBtn.onclick = async()=>{
     if(!userName || !password){
         return
     }
-    await axios.post(`${url}signUp`,{userName,password});
+    const response = await fetch(`${url}signUp`,{method:"POST",headers:{'Content-Type': 'application/json'} 
+    ,body:JSON.stringify({userName,password})});
+    if(response.ok){
+        window.location.replace(url+'signIn')
+    }
+    else{
+        alert('invalid data')
+    }
 }
